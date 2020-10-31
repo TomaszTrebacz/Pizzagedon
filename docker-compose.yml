@@ -1,0 +1,89 @@
+version: "3"
+services:
+  api-gateway:
+    build: "./api-gateway"
+    depends_on:
+      - users-service
+      - products-service
+      - orders-service
+      - articles-service
+    ports:
+      - 7000:7000
+    volumes:
+      - ./api-gateway:/opt/app
+
+  users-service:
+    build: "./users-service"
+    depends_on:
+      - users-service-db
+    environment:
+      - DB_URI=mariadb://root:yourpassword@users-service-db/pizzagedon?charset=UTF8
+    ports:
+      - 7100:7100
+    volumes:
+      - ./users-service:/opt/app
+
+  users-service-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=yourpassword
+      - MYSQL_DATABASE=pizzagedon
+    image: mariadb
+    ports:
+      - 0.0.0.0:7300:3306
+
+  products-service:
+    build: "./products-service"
+    depends_on:
+      - products-service-db
+    environment:
+      - DB_URI=mariadb://root:yourpassword@products-service-db/pizzagedon?charset=UTF8
+    ports:
+      - 7101:7101
+    volumes:
+      - ./products-service:/opt/app
+
+  products-service-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=yourpassword
+      - MYSQL_DATABASE=pizzagedon
+    image: mariadb
+    ports:
+      - 0.0.0.0:7301:3306
+
+  orders-service:
+    build: "./orders-service"
+    depends_on:
+      - orders-service-db
+    environment:
+      - DB_URI=mariadb://root:yourpassword@orders-service-db/pizzagedon?charset=UTF8
+    ports:
+      - 7102:7102
+    volumes:
+      - ./orders-service:/opt/app
+
+  orders-service-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=yourpassword
+      - MYSQL_DATABASE=pizzagedon
+    image: mariadb
+    ports:
+      - 0.0.0.0:7302:3306
+
+  articles-service:
+    build: "./articles-service"
+    depends_on:
+      - articles-service-db
+    environment:
+      - DB_URI=mariadb://root:yourpassword@articles-service-db/pizzagedon?charset=UTF8
+    ports:
+      - 7103:7103
+    volumes:
+      - ./articles-service:/opt/app
+
+  articles-service-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=yourpassword
+      - MYSQL_DATABASE=pizzagedon
+    image: mariadb
+    ports:
+      - 0.0.0.0:7303:3306

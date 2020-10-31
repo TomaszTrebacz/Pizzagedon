@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Bellota+Text:wght@300;700&display=swap');
+
+body,
+* {
+	font-family: 'Bellota Text', cursive;
+}
+
+:root {
+	--mangotango: #c94c22;
+}
+
+#menu {
+	background: var(--mangotango);
+}
