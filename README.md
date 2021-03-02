@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="next-app/public/pizza.png" width="100"/>
+  <img src="https://i.ibb.co/rdqwcC2/pizzagedon.png" width="130"/>
    <h1 align="center">Pizzagedon</h1>
 </p>
 
